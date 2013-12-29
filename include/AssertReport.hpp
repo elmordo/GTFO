@@ -80,6 +80,13 @@ public:
 	}
 
 	/**
+	 * nastavi zpravu z asertace
+	 */
+	void message(string m) {
+		this->msg = m;
+	}
+
+	/**
 	 * vraci jmeno asertace
 	 */
 	const string &name() const {
@@ -87,10 +94,21 @@ public:
 	}
 
 	/**
+	 * nastvi jmeno
+	 */
+	void name(string n) {
+		this->n = n;
+	}
+
+	/**
 	 * vraci stav z asertace
 	 */
 	ASSERT_STATE state() const {
 		return s;
+	}
+
+	void state(ASSERT_STATE s) {
+		this->s = s;
 	}
 
 	/**
