@@ -10,10 +10,27 @@
 
 #include "TestBase.hpp"
 #include "TestGroup.hpp"
+#include "AssertException.hpp"
+#include "AssertReport.hpp"
 #include <vector>
 
 namespace Gremlin {
 namespace GTFO {
+
+#define REGISTER_TEST(TEST_CALL) \
+	try {\
+		TEST_CALL;\
+		r->getReport(testIndex).state(AssertReport::ASSERTR_OK);\
+	catch (AssertException &e) {\
+		AssertReport &r = r->getReport(testIndex);\
+		r.message(e.what());\
+		r.state(AssertReport::ASSERT_FAIL);\
+	} catch (...) {\
+		AssertReport &r = r->getReport(testIndex);\
+		r.message("Unhandled unknown exception");\
+		r.state(AssertReport::ASSERT_ERROR);\
+	}\
+	testIndex++;
 
 class TestCaseReport;
 
