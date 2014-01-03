@@ -16,6 +16,8 @@
 namespace Gremlin {
 namespace GTFO {
 
+class TestCase;
+
 using namespace std;
 
 class TestCaseReport {
@@ -79,7 +81,7 @@ public:
 	/**
 	 * vraci zpravu na pozici i
 	 */
-	AssertReport &getReport(size_t i) const {
+	const AssertReport &getReport(size_t i) const {
 		// kontrola jestli zprava existuje
 		if (!hasIndex(i)) {
 			// vyhozeni nejake vyjimky
@@ -88,6 +90,16 @@ public:
 
 		return reports[i];
 	}
+
+	AssertReport &getReport(size_t i) {
+			// kontrola jestli zprava existuje
+			if (!hasIndex(i)) {
+				// vyhozeni nejake vyjimky
+				throw exception();
+			}
+
+			return reports[i];
+		}
 
 	/**
 	 * vraci True, pokud existuje zprava s indexem i

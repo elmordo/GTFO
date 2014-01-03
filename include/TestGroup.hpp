@@ -25,6 +25,10 @@ public:
 
 	}
 
+	TestGroup(const string &name) {
+		n = name;
+	}
+
 	TestGroup(const TestGroup &o) {
 		n = o.n;
 	}

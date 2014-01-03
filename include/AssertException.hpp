@@ -56,7 +56,7 @@ public:
 	/**
 	 * destruktor
 	 */
-	virtual ~AssertException() {
+	virtual ~AssertException() throw() {
 
 	}
 
@@ -70,7 +70,7 @@ public:
 	/**
 	 * vraci chybovou hlasku
 	 */
-	virtual const char *what() const {
+	virtual const char *what() const throw() {
 		return w.c_str();
 	}
 };

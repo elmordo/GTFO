@@ -12,25 +12,39 @@
 #include "TestGroup.hpp"
 #include "AssertException.hpp"
 #include "AssertReport.hpp"
+#include "TestCaseReport.hpp"
+#include "asserts.hpp"
 #include <vector>
+#include <iostream>
 
 namespace Gremlin {
 namespace GTFO {
 
+using namespace std;
+
 #define REGISTER_TEST(TEST_CALL) \
+	r->addReport();\
 	try {\
-		TEST_CALL;\
-		r->getReport(testIndex).state(AssertReport::ASSERTR_OK);\
-	catch (AssertException &e) {\
-		AssertReport &r = r->getReport(testIndex);\
-		r.message(e.what());\
-		r.state(AssertReport::ASSERT_FAIL);\
+		setUp();\
+		TEST_CALL();\
+		r->getReport(testIndex).state(AssertReport::ASSERT_OK);\
+		cout << ".";\
+	} catch (AssertException &e) {\
+		AssertReport &rep = r->getReport(testIndex);\
+		rep.message(e.what());\
+		rep.state(AssertReport::ASSERT_FAIL);\
+		cout << "F";\
 	} catch (...) {\
-		AssertReport &r = r->getReport(testIndex);\
-		r.message("Unhandled unknown exception");\
-		r.state(AssertReport::ASSERT_ERROR);\
+		AssertReport &rep = r->getReport(testIndex);\
+		rep.message("Unhandled unknown exception");\
+		rep.state(AssertReport::ASSERT_ERROR);\
+		cout << "E";\
 	}\
+	tearDown();\
 	testIndex++;
+
+#define TEST_CASE : public TestCase
+#define TEST_INIT std::size_t testIndex = 0;
 
 class TestCaseReport;
 
@@ -42,14 +56,16 @@ public:
 private:
 
 	/**
-	 * ukazatel na zpravu z vysledku
-	 */
-	TestCaseReport *r;
-
-	/**
 	 * seznam skupin, kterych je case clenem
 	 */
 	TestGroupList g;
+
+protected:
+
+	/**
+	 * ukazatel na zpravu z vysledku
+	 */
+	TestCaseReport *r;
 
 public:
 
@@ -64,7 +80,7 @@ public:
 	 * kopytor
 	 */
 	TestCase(const TestCase &o) {
-		r = new TestCaseReport(o.r);
+		r = new TestCaseReport(*o.r);
 	}
 
 	/**
@@ -97,7 +113,7 @@ public:
 	 * vraci True, pokud je TC v dane skupiny
 	 */
 	bool hasGroup(const string &name) const {
-		for (TestGroupList::iterator pos = g.begin(); pos != g.end(); pos++) {
+		for (TestGroupList::const_iterator pos = g.begin(); pos != g.end(); pos++) {
 
 			if (pos->name() == name)
 				return true;
