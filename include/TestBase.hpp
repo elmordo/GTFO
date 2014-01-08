@@ -8,7 +8,6 @@
 #ifndef TESTBASE_HPP_
 #define TESTBASE_HPP_
 
-
 namespace Gremlin {
 namespace GTFO {
 

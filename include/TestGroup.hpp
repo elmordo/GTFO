@@ -9,6 +9,7 @@
 #define TESTGROUP_HPP_
 
 #include<string>
+#include<vector>
 
 using namespace std;
 
@@ -45,6 +46,8 @@ public:
 		this->n = n;
 	}
 };
+
+typedef vector<TestGroup> TestGroupList;
 
 }
 }

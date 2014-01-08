@@ -6,6 +6,7 @@
  */
 
 #include "TestCase.hpp"
+#include "TestSuite.hpp"
 
 using namespace Gremlin::GTFO;
 
@@ -35,11 +36,55 @@ public:
 	}
 };
 
+class Test2 TEST_CASE {
+
+public:
+
+	virtual void doTests() {
+		TEST_INIT
+
+		addGroup("G1");
+
+		REGISTER_TEST(testEquals1)
+		REGISTER_TEST(testEquals2)
+	}
+
+	void testEquals1() {
+		int i1 = 1;
+		int i2 = 2;
+
+		assertEqual(i1, i2, "Ahoj");
+	}
+
+	void testEquals2() {
+		int i1 = 1;
+		int i2 = 1;
+
+		assertEqual(i1, i2, "Ahoj svete");
+	}
+};
+
+class Suite TEST_SUITE {
+
+public:
+
+	Suite() {
+		REGISTER_TESTCASE(Test1);
+		REGISTER_TESTCASE(Test2);
+	}
+};
+
 int main() {
 
-	Test1 t;
+	Suite s;
+	TestGroupSettings set;
 
-	t.doTests();
+	s.doTests();
+
+	set.isInclude(true);
+	set.groups().push_back(TestGroup("G1"));
+
+	s.doTests(set);
 
 	return 0;
 }

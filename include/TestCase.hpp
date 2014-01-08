@@ -49,11 +49,6 @@ using namespace std;
 class TestCaseReport;
 
 class TestCase: public TestBase {
-public:
-
-	typedef vector<TestGroup> TestGroupList;
-
-private:
 
 	/**
 	 * seznam skupin, kterych je case clenem
