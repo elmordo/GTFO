@@ -7,19 +7,19 @@
 
 #include "TestCase.hpp"
 #include "TestSuite.hpp"
+#include <iostream>
 
 using namespace Gremlin::GTFO;
+using namespace std;
 
 class Test1 TEST_CASE {
 
 public:
 
-	virtual void doTests() {
-		TEST_INIT
-
-		REGISTER_TEST(testEquals1)
-		REGISTER_TEST(testEquals2)
-	}
+	TEST_DO(
+			REGISTER_TEST(testEquals1)
+			REGISTER_TEST(testEquals2)
+	)
 
 	void testEquals1() {
 		int i1 = 1;
@@ -40,14 +40,14 @@ class Test2 TEST_CASE {
 
 public:
 
-	virtual void doTests() {
-		TEST_INIT
+	TEST_INIT(
+		TEST_AGROUP("G1")
+	)
 
-		addGroup("G1");
-
+	TEST_DO(
 		REGISTER_TEST(testEquals1)
 		REGISTER_TEST(testEquals2)
-	}
+	)
 
 	void testEquals1() {
 		int i1 = 1;
@@ -74,17 +74,7 @@ public:
 	}
 };
 
-int main() {
-
-	Suite s;
-	TestGroupSettings set;
-
-	s.doTests();
-
-	set.isInclude(true);
-	set.groups().push_back(TestGroup("G1"));
-
-	s.doTests(set);
-
-	return 0;
-}
+GTFO_TEST_MAIN(
+		REGISTER_SUITE(Suite)
+		REGISTER_SUITE(Suite)
+)

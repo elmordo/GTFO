@@ -20,7 +20,7 @@ namespace Gremlin {
 namespace GTFO {
 
 #define TEST_SUITE : public TestSuite
-#define REGISTER_TESTCASE(CLASS_NAME) this->tc.push_back(new CLASS_NAME())
+#define REGISTER_TESTCASE(CLASS_NAME) this->tc.push_back(new CLASS_NAME());this->tc.back()->init()
 
 class TestSuite: public TestBase {
 public:

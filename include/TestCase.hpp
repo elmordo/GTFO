@@ -44,7 +44,10 @@ using namespace std;
 	testIndex++;
 
 #define TEST_CASE : public TestCase
-#define TEST_INIT std::size_t testIndex = 0;
+#define TEST_IINIT std::size_t testIndex = 0;
+#define TEST_AGROUP(gName) addGroup(gName);
+#define TEST_DO(TESTS...) virtual void doTests() {TEST_IINIT TESTS}
+#define TEST_INIT(VALS...) virtual void init() { VALS }
 
 class TestCaseReport;
 
@@ -69,6 +72,7 @@ public:
 	 */
 	TestCase() {
 		r = new TestCaseReport();
+		init();
 	}
 
 	/**
@@ -119,6 +123,13 @@ public:
 
 	bool hasGroup(const TestGroup &group) const {
 		return hasGroup(group.name());
+	}
+
+	/**
+	 * pripravi instanci
+	 */
+	virtual void init() {
+
 	}
 
 	/**
