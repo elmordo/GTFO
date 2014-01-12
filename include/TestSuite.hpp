@@ -13,6 +13,7 @@
 
 #include <vector>
 #include "TestGroupSettings.hpp"
+#include <iostream>
 
 using namespace std;
 
@@ -102,6 +103,55 @@ public:
 					continue;
 
 				(*pos)->doTests();
+			}
+		}
+	}
+
+	void printReports(ostream &out) {
+		for (TestCaseList::const_iterator pos = tc.begin();
+				pos != tc.end();
+				pos++)
+		{
+			const TestCaseReport::AssertReportList r = (*pos)->report()->reports();
+			int testIndex = 1;
+
+			cout << endl << endl;
+
+			for (TestCaseReport::AssertReportList::const_iterator rep = r.begin();
+					rep != r.end();
+					rep++)
+			{
+				if (rep->state() != AssertReport::ASSERT_OK) {
+					cout << "Test case class (by typeid): " << rep->className() << endl;
+					cout << "Test index: " << testIndex << endl;
+					cout << "Test name: " << rep->name() << endl;
+					cout << "State: ";
+
+					switch (rep->state()) {
+					case AssertReport::ASSERT_ERROR:
+						cout << "Error";
+						break;
+
+					case AssertReport::ASSERT_FAIL:
+						cout << "Fail";
+						break;
+
+					case AssertReport::NOT_ASSERTED:
+						cout << "Not asserted";
+						break;
+
+					default:
+						cout << "Unknown status";
+						break;
+					}
+
+					cout << endl;
+
+					cout << rep->message() << endl;
+					cout << "-------------------------" << endl << endl;
+				}
+
+				testIndex++;
 			}
 		}
 	}

@@ -682,7 +682,7 @@
         <dia:point val="40.4,14.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.35,14.35;60.2,28.25"/>
+        <dia:rectangle val="40.35,14.35;60.2,30.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="40.4,14.4"/>
@@ -691,7 +691,7 @@
         <dia:real val="19.75"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.800000000000001"/>
+        <dia:real val="16.200000000000003"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#AssertReport#</dia:string>
@@ -783,16 +783,16 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#s#</dia:string>
+            <dia:string>#c#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#ASSERT_STATE#</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#stav asertace#</dia:string>
+            <dia:string>#jméno třídy (potomek TestCase), které se test týká#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="1"/>
@@ -839,6 +839,29 @@
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#jméno asertace#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="1"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#s#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#ASSERT_STATE#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#stav asertace#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="1"/>
@@ -1041,6 +1064,84 @@
             <dia:boolean val="false"/>
           </dia:attribute>
           <dia:attribute name="parameters"/>
+        </dia:composite>
+        <dia:composite type="umloperation">
+          <dia:attribute name="name">
+            <dia:string>#className#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="stereotype">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#const std::string &amp;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#vrací jméno TestCase#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="inheritance_type">
+            <dia:enum val="2"/>
+          </dia:attribute>
+          <dia:attribute name="query">
+            <dia:boolean val="true"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="parameters"/>
+        </dia:composite>
+        <dia:composite type="umloperation">
+          <dia:attribute name="name">
+            <dia:string>#className#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="stereotype">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#void#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#nastaví nové jméno TestCase#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="inheritance_type">
+            <dia:enum val="2"/>
+          </dia:attribute>
+          <dia:attribute name="query">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="parameters">
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#n#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#std::string#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>#nové jméno#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+          </dia:attribute>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
@@ -2212,16 +2313,16 @@ ASSERT_ERROR#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="50.275,14.3496"/>
+        <dia:point val="50.275,14.3495"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.16,10.2005;51.025,15.1496"/>
+        <dia:rectangle val="49.16,10.2005;51.025,15.1495"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="50.275,14.3496"/>
+        <dia:point val="50.275,14.3495"/>
         <dia:point val="50.275,11.95"/>
         <dia:point val="49.21,11.95"/>
         <dia:point val="49.21,10.2505"/>
@@ -2241,7 +2342,7 @@ ASSERT_ERROR#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O1" connection="36"/>
+        <dia:connection handle="0" to="O1" connection="42"/>
         <dia:connection handle="1" to="O2" connection="8"/>
       </dia:connections>
     </dia:object>
@@ -2286,7 +2387,7 @@ ASSERT_ERROR#</dia:string>
         <dia:point val="34.7303,27.45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.9803,20.55;40.3997,28.3"/>
+        <dia:rectangle val="33.9803,21.75;40.3997,28.3"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2294,8 +2395,8 @@ ASSERT_ERROR#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="34.7303,27.45"/>
         <dia:point val="37.89,27.45"/>
-        <dia:point val="37.89,21.3"/>
-        <dia:point val="40.3497,21.3"/>
+        <dia:point val="37.89,22.5"/>
+        <dia:point val="40.3497,22.5"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -2313,7 +2414,7 @@ ASSERT_ERROR#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O5" connection="8"/>
-        <dia:connection handle="1" to="O1" connection="36"/>
+        <dia:connection handle="1" to="O1" connection="42"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O8">
@@ -3664,7 +3765,7 @@ ASSERT_ERROR#</dia:string>
         <dia:point val="38.65,-6.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.6,-6.95;63.07,-1.05"/>
+        <dia:rectangle val="38.6,-6.95;63.07,-0.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="38.65,-6.9"/>
@@ -3673,7 +3774,7 @@ ASSERT_ERROR#</dia:string>
         <dia:real val="24.369999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.8000000000000007"/>
+        <dia:real val="6.5999999999999996"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#TestSuite#</dia:string>
@@ -3944,6 +4045,54 @@ ASSERT_ERROR#</dia:string>
             </dia:composite>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umloperation">
+          <dia:attribute name="name">
+            <dia:string>#printReports#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="stereotype">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#void#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#vypíše zprávy z chybných testů na daný výstup#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="inheritance_type">
+            <dia:enum val="2"/>
+          </dia:attribute>
+          <dia:attribute name="query">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="parameters">
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#out#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#ostream &amp;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>#reference na výstup#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -3955,7 +4104,7 @@ ASSERT_ERROR#</dia:string>
         <dia:point val="22.4954,-3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.4454,-4.25;38.6496,-2.15"/>
+        <dia:rectangle val="22.4454,-4.05;38.6496,-2.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3963,8 +4112,8 @@ ASSERT_ERROR#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="22.4954,-3"/>
         <dia:point val="30.9475,-3"/>
-        <dia:point val="30.9475,-4"/>
-        <dia:point val="38.5996,-4"/>
+        <dia:point val="30.9475,-3.6"/>
+        <dia:point val="38.5996,-3.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -3988,7 +4137,7 @@ ASSERT_ERROR#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O12" connection="12"/>
-        <dia:connection handle="1" to="O18" connection="18"/>
+        <dia:connection handle="1" to="O18" connection="20"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Object" version="0" id="O20">
@@ -4191,18 +4340,18 @@ ASSERT_ERROR#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="50.835,-1.04964"/>
+        <dia:point val="50.835,-0.249591"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.6625,-1.79964;51.585,5.14954"/>
+        <dia:rectangle val="21.6625,-0.999591;51.585,5.14954"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="50.835,-1.04964"/>
-        <dia:point val="50.835,1.99995"/>
-        <dia:point val="21.7125,1.99995"/>
+        <dia:point val="50.835,-0.249591"/>
+        <dia:point val="50.835,2.39997"/>
+        <dia:point val="21.7125,2.39997"/>
         <dia:point val="21.7125,4.34954"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -4220,7 +4369,7 @@ ASSERT_ERROR#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O18" connection="18"/>
+        <dia:connection handle="0" to="O18" connection="20"/>
         <dia:connection handle="1" to="O20" connection="8"/>
       </dia:connections>
     </dia:object>

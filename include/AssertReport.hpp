@@ -39,6 +39,11 @@ private:
 	string n;
 
 	/**
+	 * jmeno testovaci tridy
+	 */
+	string c;
+
+	/**
 	 * stav asertace
 	 */
 	ASSERT_STATE s;
@@ -66,10 +71,26 @@ public:
 	AssertReport(const AssertReport &o) {
 		msg = o.msg;
 		s = o.s;
+		n = o.n;
+		c = o.c;
 	}
 
 	virtual ~AssertReport() {
 
+	}
+
+	/**
+	 * vraci jmeno testovaci tridy
+	 */
+	const string &className() const {
+		return c;
+	}
+
+	/**
+	 * nastavi jmeno testovaci tridy
+	 */
+	void className(string c) {
+		this->c = c;
 	}
 
 	/**

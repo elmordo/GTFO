@@ -33,7 +33,7 @@ private:
 	/**
 	 * seznam zprav z asertaci
 	 */
-	AssertReportList reports;
+	AssertReportList r;
 
 	/**
 	 * ukazatel na TestCase, ktereho se zprava tyka
@@ -48,12 +48,12 @@ public:
 
 	TestCaseReport(const TestCase *testCase, size_t count = 0) {
 		tc = testCase;
-		reports = AssertReportList(count);
+		r = AssertReportList(count);
 	}
 
 	TestCaseReport(const TestCaseReport &o) {
 		tc = o.tc;
-		reports = o.reports;
+		r = o.r;
 	}
 
 	virtual ~TestCaseReport(){
@@ -64,18 +64,18 @@ public:
 	 * vytvori novou zpravu, vlozi ji na posledni misto v seznamu a vraci novou instanci
 	 */
 	AssertReport &addReport() {
-		reports.push_back(AssertReport());
+		r.push_back(AssertReport());
 
-		return reports.back();
+		return r.back();
 	}
 
 	/**
 	 * zkopiruje zpravu a vlozi ji na konec seznamu
 	 */
 	AssertReport &addReport(const AssertReport &report) {
-		reports.push_back(report);
+		r.push_back(report);
 
-		return reports.back();
+		return r.back();
 	}
 
 	/**
@@ -88,7 +88,7 @@ public:
 			throw exception();
 		}
 
-		return reports[i];
+		return r[i];
 	}
 
 	AssertReport &getReport(size_t i) {
@@ -98,28 +98,39 @@ public:
 				throw exception();
 			}
 
-			return reports[i];
+			return r[i];
 		}
 
 	/**
 	 * vraci True, pokud existuje zprava s indexem i
 	 */
 	inline bool hasIndex(size_t i) const {
-		return i >= 0 && i < reports.size();
+		return i >= 0 && i < r.size();
 	}
 
 	/**
 	 * odebere zpravu z daneho mista
 	 */
 	inline void removeReport(size_t i) {
-		reports.erase(reports.begin() + i);
+		r.erase(r.begin() + i);
 	}
+
+	/**
+	 * vraci (konstantni) referenci na seznam zprav z asertaci
+	 */
+	inline const AssertReportList &reports() const {
+		return r;
+	}
+
+	inline AssertReportList &reports() {
+			return r;
+		}
 
 	/**
 	 * vraci pocet reportu
 	 */
 	inline size_t size() const {
-		return reports.size();
+		return r.size();
 	}
 
 	/**

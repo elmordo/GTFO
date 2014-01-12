@@ -8,6 +8,8 @@
 #ifndef TESTBASE_HPP_
 #define TESTBASE_HPP_
 
+#define GTFO_MAIN_INIT \#include <iostream>
+
 #define GTFO_TEST_MAIN(SUITES...) int main(int argc, char** argv) {\
 	TestGroupSettings settings;/* naparsovani argumentu*/\
 	if (argc > 1) {\
@@ -25,6 +27,7 @@
 #define REGISTER_SUITE(CLASS_NAME) {\
 	CLASS_NAME s;\
 	s.doTests(settings);\
+	s.printReports(std::cout);\
 }
 
 namespace Gremlin {

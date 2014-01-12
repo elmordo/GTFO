@@ -16,6 +16,7 @@
 #include "asserts.hpp"
 #include <vector>
 #include <iostream>
+#include <typeinfo>
 
 namespace Gremlin {
 namespace GTFO {
@@ -24,8 +25,10 @@ using namespace std;
 
 #define REGISTER_TEST(TEST_CALL) \
 	r->addReport();\
+	r->getReport(testIndex).name(#TEST_CALL);\
+	r->getReport(testIndex).className(className);\
+	setUp();\
 	try {\
-		setUp();\
 		TEST_CALL();\
 		r->getReport(testIndex).state(AssertReport::ASSERT_OK);\
 		cout << ".";\
@@ -33,18 +36,19 @@ using namespace std;
 		AssertReport &rep = r->getReport(testIndex);\
 		rep.message(e.what());\
 		rep.state(AssertReport::ASSERT_FAIL);\
-		cout << "F";\
+		cout << "F(" << (testIndex+1) << ")";\
 	} catch (...) {\
 		AssertReport &rep = r->getReport(testIndex);\
 		rep.message("Unhandled unknown exception");\
 		rep.state(AssertReport::ASSERT_ERROR);\
-		cout << "E";\
+		cout << "E(" << (testIndex+1) << ")";\
 	}\
 	tearDown();\
 	testIndex++;
 
 #define TEST_CASE : public TestCase
-#define TEST_IINIT std::size_t testIndex = 0;
+#define TEST_IINIT std::size_t testIndex = 0;\
+	std::string className = typeid(this).name();
 #define TEST_AGROUP(gName) addGroup(gName);
 #define TEST_DO(TESTS...) virtual void doTests() {TEST_IINIT TESTS}
 #define TEST_INIT(VALS...) virtual void init() { VALS }
