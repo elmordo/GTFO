@@ -11,6 +11,7 @@
 #include "AssertReport.hpp"
 #include "AssertException.hpp"
 #include <string>
+#include <typeinfo>
 
 using namespace std;
 
@@ -88,7 +89,7 @@ void assertLessOrEqual(G g, E e, string msg) {
  */
 template<class E>
 void assertInstanceOf(void *g, string msg) {
-	if (dynamic_cast<E*>(g) == 0) {
+	if (typeid(g) != typeid(E)) {
 		throw AssertException(msg);
 	}
 }
