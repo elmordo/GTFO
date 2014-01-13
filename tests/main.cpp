@@ -12,6 +12,46 @@
 using namespace Gremlin::GTFO;
 using namespace std;
 
+class A {
+
+public:
+
+	A() {
+
+	}
+
+	virtual ~A() {
+
+	}
+};
+
+class B : public A {
+
+public:
+
+	B() {
+
+	}
+
+	virtual ~B() {
+
+	}
+};
+
+class C {
+
+public:
+
+	C() {
+
+	}
+
+	virtual ~C() {
+
+	}
+};
+
+
 class Test1 TEST_CASE {
 
 public:
@@ -19,6 +59,9 @@ public:
 	TEST_DO(
 			REGISTER_TEST(testEquals1)
 			REGISTER_TEST(testEquals2)
+			REGISTER_TEST(testInstance1)
+			REGISTER_TEST(testInstance2)
+			REGISTER_TEST(testInstance3)
 	)
 
 	void testEquals1() {
@@ -33,6 +76,24 @@ public:
 		int i2 = 1;
 
 		assertEqual(i1, i2, "Ahoj svete");
+	}
+
+	void testInstance1() {
+		A a;
+
+		assertInstanceOf<A>(&a, "Invalid instance");
+	}
+
+	void testInstance2() {
+		A a;
+
+		assertInstanceOf<B>(&a, "Invalid instance");
+	}
+
+	void testInstance3() {
+		B a;
+
+		assertInstanceOf<A>(&a, "Invalid instance");
 	}
 };
 
@@ -75,6 +136,5 @@ public:
 };
 
 GTFO_TEST_MAIN(
-		REGISTER_SUITE(Suite)
 		REGISTER_SUITE(Suite)
 )

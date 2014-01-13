@@ -145,7 +145,7 @@ public:
 						break;
 					}
 
-					cout << endl;
+					cout << endl << "Message :" << endl;
 
 					cout << rep->message() << endl;
 					cout << "-------------------------" << endl << endl;
