@@ -7,6 +7,7 @@
 
 #include "TestCase.hpp"
 #include "TestSuite.hpp"
+#include "Profiler.hpp"
 #include <iostream>
 
 using namespace Gremlin::GTFO;
@@ -136,5 +137,12 @@ public:
 };
 
 GTFO_TEST_MAIN(
+
+		GTFO_START_PROFILING1("P1");
+
 		REGISTER_SUITE(Suite)
+
+		GTFO_STOP_PROFILING("P1");
+
+		Profiler::output(cout);
 )
