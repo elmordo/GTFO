@@ -17,7 +17,7 @@
 
 #define GTFO_START_PROFILING1(NAME) Profiler::createInstance(NAME)->start();
 
-#define GTFO_START_PROFILIMG2(NAME, PARENTNAME) PRofiler::createInstance(NAME, PARENTNAME)->start();
+#define GTFO_START_PROFILING2(NAME, PARENTNAME) Profiler::createInstance(NAME, PARENTNAME)->start();
 
 #define GTFO_STOP_PROFILING(NAME) Profiler::getInstance(NAME)->stop();
 
