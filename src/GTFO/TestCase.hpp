@@ -18,7 +18,7 @@
 #include <iostream>
 #include <typeinfo>
 
-namespace Gremlin {
+namespace Sopka {
 namespace GTFO {
 
 using namespace std;

@@ -13,7 +13,7 @@
 #include <vector>
 #include <exception>
 
-namespace Gremlin {
+namespace Sopka {
 namespace GTFO {
 
 class TestCase;

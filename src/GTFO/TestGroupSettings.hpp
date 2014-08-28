@@ -10,7 +10,7 @@
 
 #include "TestGroup.hpp"
 
-namespace Gremlin {
+namespace Sopka {
 namespace GTFO {
 
 class TestGroupSettings {

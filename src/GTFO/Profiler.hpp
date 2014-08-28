@@ -23,7 +23,7 @@
 
 #define GTFO_IP if (Profiler::pi == 0x0) Profiler::pi = new ProfilerMap();
 
-namespace Gremlin {
+namespace Sopka {
 namespace GTFO {
 
 using namespace std;

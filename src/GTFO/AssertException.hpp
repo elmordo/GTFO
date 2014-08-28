@@ -13,7 +13,7 @@
 
 using namespace std;
 
-namespace Gremlin {
+namespace Sopka {
 namespace GTFO {
 
 class AssertException : public exception {

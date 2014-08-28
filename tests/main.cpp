@@ -5,12 +5,14 @@
  *      Author: petr
  */
 
-#include "TestCase.hpp"
-#include "TestSuite.hpp"
-#include "Profiler.hpp"
 #include <iostream>
 
-using namespace Gremlin::GTFO;
+#include "GTFO/TestCase.hpp"
+#include "GTFO/TestSuite.hpp"
+#include "GTFO/Profiler.hpp"
+
+
+using namespace Sopka::GTFO;
 using namespace std;
 
 class A {

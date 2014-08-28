@@ -30,7 +30,7 @@
 	s.printReports(std::cout);\
 }
 
-namespace Gremlin {
+namespace Sopka {
 namespace GTFO {
 
 class TestBase {

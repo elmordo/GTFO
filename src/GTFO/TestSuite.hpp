@@ -17,7 +17,7 @@
 
 using namespace std;
 
-namespace Gremlin {
+namespace Sopka {
 namespace GTFO {
 
 #define TEST_SUITE : public TestSuite
