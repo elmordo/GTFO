@@ -30,23 +30,23 @@ using namespace std;
 	setUp();\
 	try {\
 		TEST_CALL();\
-		r->getReport(testIndex).state(AssertReport::ASSERT_OK);\
+		r->getReport(testIndex).state(Sopka::GTFO::AssertReport::ASSERT_OK);\
 		cout << ".";\
-	} catch (AssertException &e) {\
-		AssertReport &rep = r->getReport(testIndex);\
+	} catch (Sopka::GTFO::AssertException &e) {\
+		Sopka::GTFO::AssertReport &rep = r->getReport(testIndex);\
 		rep.message(e.what());\
-		rep.state(AssertReport::ASSERT_FAIL);\
+		rep.state(Sopka::GTFO::AssertReport::ASSERT_FAIL);\
 		cout << "F(" << (testIndex+1) << ")";\
 	} catch (...) {\
-		AssertReport &rep = r->getReport(testIndex);\
+		Sopka::GTFO::AssertReport &rep = r->getReport(testIndex);\
 		rep.message("Unhandled unknown exception");\
-		rep.state(AssertReport::ASSERT_ERROR);\
+		rep.state(Sopka::GTFO::AssertReport::ASSERT_ERROR);\
 		cout << "E(" << (testIndex+1) << ")";\
 	}\
 	tearDown();\
 	testIndex++;
 
-#define TEST_CASE : public TestCase
+#define TEST_CASE : public Sopka::GTFO::TestCase
 #define TEST_IINIT std::size_t testIndex = 0;\
 	std::string className = typeid(this).name();
 #define TEST_AGROUP(gName) addGroup(gName);

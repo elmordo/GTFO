@@ -118,7 +118,8 @@ void assertNotIdentical(T &g, T &e, string msg) {
 /**
  * asertace, jestli je dany ukazatel NULL (0x0)
  */
-void assertNull(void *g, string msg) {
+template <class G>
+void assertNull(G *g, string msg) {
 	if (g != 0x0) {
 		throw AssertException(msg);
 	}
@@ -127,7 +128,8 @@ void assertNull(void *g, string msg) {
 /**
  * asertace, jestli dany ukazatel neni NULL (0x0)
  */
-void assertNotNull(void *g, string msg) {
+template<class G>
+void assertNotNull(G *g, string msg) {
 	if (g == 0x0) {
 		throw AssertException(msg);
 	}
@@ -136,7 +138,8 @@ void assertNotNull(void *g, string msg) {
 /**
  * asertace, jestli je dana hodnota True
  */
-void assertTrue(bool g, string msg) {
+template<class G=bool>
+void assertTrue(G g, string msg) {
 	if (!g) {
 		throw AssertException(msg);
 	}
@@ -145,7 +148,8 @@ void assertTrue(bool g, string msg) {
 /**
  * asertace, jestli je dana hodnota False
  */
-void assertFalse(bool g, string msg) {
+template<class G=bool>
+void assertFalse(G g, string msg) {
 	if (g) {
 		throw AssertException(msg);
 	}

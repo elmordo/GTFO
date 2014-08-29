@@ -11,13 +11,13 @@
 #define GTFO_MAIN_INIT \#include <iostream>
 
 #define GTFO_TEST_MAIN(SUITES...) int main(int argc, char** argv) {\
-	TestGroupSettings settings;/* naparsovani argumentu*/\
+	Sopka::GTFO::TestGroupSettings settings;/* naparsovani argumentu*/\
 	if (argc > 1) {\
 		/* vyhodnoceni, zda se bude includovat nebo excludovat */ \
 		string ie(argv[1]);\
 		if (ie == "-i") settings.isInclude(true);\
 		for (int i = 2; i < argc; i++) {\
-			settings.groups().push_back(TestGroup(argv[i]));\
+			settings.groups().push_back(Sopka::GTFO::TestGroup(argv[i]));\
 		}\
 	}\
 	SUITES\
