@@ -40,7 +40,7 @@ public:
 	/**
 	 * konstruktor vytvori chybovou hlasku
 	 */
-	AssertException(string w, int c = 1) {
+	AssertException(const string &w, int c = 1) {
 		this->w = w;
 		this->c = c;
 	}

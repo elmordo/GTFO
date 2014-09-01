@@ -13,20 +13,32 @@
 #include <string>
 #include <string.h>
 #include <typeinfo>
+#include <cstdarg>
+#include <cstdio>
 
 using namespace std;
 
 namespace Sopka {
 namespace GTFO {
 
+static char messageBuffer[1024];
+
+#ifndef THROW_ASSERT
+#define THROW_ASSERT va_list msgArgs; va_start(msgArgs, msg); vsprintf(messageBuffer, msg, msgArgs);va_end(msgArgs); throw AssertException(messageBuffer);
+#endif
+
+#ifndef ASSERT_MESSAGE
+#define ASSERT_MESSAGE const char *msg, ...
+#endif
+
 /**
  * asertace, jestli hodnoty jsou stejne pomoci operatoru ==
  */
 template<class E, class G>
-void assertEqual(G g, E e, string msg) {
+void assertEqual(G g, E e, ASSERT_MESSAGE) {
 	if (!(e == g)) {
 		// vyhozeni vyjimky
-		throw AssertException(msg);
+		THROW_ASSERT;
 	}
 }
 
@@ -34,10 +46,10 @@ void assertEqual(G g, E e, string msg) {
  * asertace, jestli hodnoty jsou rozdilne pomoci operatoru !=
  */
 template<class E, class G>
-void assertNotEqual(G g, E e, string msg) {
+void assertNotEqual(G g, E e, ASSERT_MESSAGE) {
 	if (!(e != g)) {
 		// vyhozeni vyjimky
-		throw AssertException(msg);
+		THROW_ASSERT
 	}
 }
 
@@ -45,10 +57,11 @@ void assertNotEqual(G g, E e, string msg) {
  * asertace, jestli hodnota g je vetsi nez e pomoci operatoru >
  */
 template<class E, class G>
-void assertGreater(G g, E e, string msg) {
-	if (!(e > g)) {
+void assertGreater(G g, E e, ASSERT_MESSAGE) {
+	if (!(g > e)) {
 		// vyhozeni vyjimky
-		throw AssertException(msg);
+		THROW_ASSERT
+
 	}
 }
 
@@ -56,10 +69,10 @@ void assertGreater(G g, E e, string msg) {
  * asertace, jestli hodnota g je vetsi nebo rovno e pomoci operatoru >=
  */
 template<class E, class G>
-void assertGreaterOrEqual(G g, E e, string msg) {
-	if (!(e >= g)) {
+void assertGreaterOrEqual(G g, E e, ASSERT_MESSAGE) {
+	if (!(g >= e)) {
 		// vyhozeni vyjimky
-		throw AssertException(msg);
+		THROW_ASSERT
 	}
 }
 
@@ -67,10 +80,10 @@ void assertGreaterOrEqual(G g, E e, string msg) {
  * asertace, jestli hodnota g je mensi nez e pomoci operatoru <
  */
 template<class E, class G>
-void assertLess(G g, E e, string msg) {
-	if (!(e < g)) {
+void assertLess(G g, E e, ASSERT_MESSAGE) {
+	if (!(g < e)) {
 		// vyhozeni vyjimky
-		throw AssertException(msg);
+		THROW_ASSERT
 	}
 }
 
@@ -78,10 +91,10 @@ void assertLess(G g, E e, string msg) {
  * asertace, jestli hodnota g je mensi nebo rovno e pomoci operatoru <=
  */
 template<class E, class G>
-void assertLessOrEqual(G g, E e, string msg) {
-	if (!(e <= g)) {
+void assertLessOrEqual(G g, E e, ASSERT_MESSAGE) {
+	if (!(g <= e)) {
 		// vyhozeni vyjimky
-		throw AssertException(msg);
+		THROW_ASSERT
 	}
 }
 
@@ -89,9 +102,9 @@ void assertLessOrEqual(G g, E e, string msg) {
  * asertace, jestli ukazatel ukazuje na spravnou instanci
  */
 template<class E, class B>
-void assertInstanceOf(B *g, string msg) {
+void assertInstanceOf(B *g, ASSERT_MESSAGE) {
 	if ((dynamic_cast<E*>(g)) == 0) {
-		throw AssertException(msg);
+		THROW_ASSERT;
 	}
 }
 
@@ -109,9 +122,9 @@ void assertIdentical(T &g, T &e, string msg) {
  * asertace, jestli g a e jsou ruzne instance (ruzne misto v pameti)
  */
 template<class T>
-void assertNotIdentical(T &g, T &e, string msg) {
+void assertNotIdentical(T &g, T &e, ASSERT_MESSAGE) {
 	if (&g == &e) {
-		throw AssertException(msg);
+		THROW_ASSERT
 	}
 }
 
@@ -119,9 +132,9 @@ void assertNotIdentical(T &g, T &e, string msg) {
  * asertace, jestli je dany ukazatel NULL (0x0)
  */
 template <class G>
-void assertNull(G *g, string msg) {
+void assertNull(G *g, ASSERT_MESSAGE) {
 	if (g != 0x0) {
-		throw AssertException(msg);
+		THROW_ASSERT
 	}
 }
 
@@ -129,9 +142,9 @@ void assertNull(G *g, string msg) {
  * asertace, jestli dany ukazatel neni NULL (0x0)
  */
 template<class G>
-void assertNotNull(G *g, string msg) {
+void assertNotNull(G *g, ASSERT_MESSAGE) {
 	if (g == 0x0) {
-		throw AssertException(msg);
+		THROW_ASSERT
 	}
 }
 
@@ -139,9 +152,9 @@ void assertNotNull(G *g, string msg) {
  * asertace, jestli je dana hodnota True
  */
 template<class G=bool>
-void assertTrue(G g, string msg) {
+void assertTrue(G g, ASSERT_MESSAGE) {
 	if (!g) {
-		throw AssertException(msg);
+		THROW_ASSERT
 	}
 }
 
@@ -149,11 +162,41 @@ void assertTrue(G g, string msg) {
  * asertace, jestli je dana hodnota False
  */
 template<class G=bool>
-void assertFalse(G g, string msg) {
+void assertFalse(G g, ASSERT_MESSAGE) {
 	if (g) {
-		throw AssertException(msg);
+		THROW_ASSERT
 	}
 }
+
+/**
+ * test if arrays has equal elements
+ */
+template<class E, class G>
+void assertArrayEqual(G g, E e, size_t n, ASSERT_MESSAGE) {
+    try {
+        for (size_t i = 0; i < n; ++i)
+            assertEqual(g[i], e[i], "");
+    } catch (AssertException &) {
+        THROW_ASSERT
+    }
+}
+
+/**
+ * test if arrays has equal elements
+ */
+template<class E, class G>
+void assertArrayNotEqual(G g, E e, size_t n, ASSERT_MESSAGE) {
+    try {
+        assertArrayEqual(g, e, n, "");
+    } catch (AssertException &) {
+        return;
+    }
+
+    THROW_ASSERT
+}
+
+#undef THROW_ASSERT
+#undef ASSERT_MESSAGE
 
 }
 }

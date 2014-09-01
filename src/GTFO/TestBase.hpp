@@ -21,6 +21,7 @@
 		}\
 	}\
 	SUITES\
+	std::cout << endl << endl << "-----------" << endl << "All tests were finished" << endl;\
 	return 0;\
 }
 
