@@ -32,7 +32,7 @@ static char messageBuffer[1024];
 #endif
 
 /**
- * asertace, jestli hodnoty jsou stejne pomoci operatoru ==
+ * equal assertation by operator ==
  */
 template<class E, class G>
 void assertEqual(G g, E e, ASSERT_MESSAGE) {
@@ -43,7 +43,7 @@ void assertEqual(G g, E e, ASSERT_MESSAGE) {
 }
 
 /**
- * asertace, jestli hodnoty jsou rozdilne pomoci operatoru !=
+ * non equal assertatiob by operator !=
  */
 template<class E, class G>
 void assertNotEqual(G g, E e, ASSERT_MESSAGE) {
@@ -54,7 +54,7 @@ void assertNotEqual(G g, E e, ASSERT_MESSAGE) {
 }
 
 /**
- * asertace, jestli hodnota g je vetsi nez e pomoci operatoru >
+ * is greater by operator >
  */
 template<class E, class G>
 void assertGreater(G g, E e, ASSERT_MESSAGE) {
@@ -66,7 +66,7 @@ void assertGreater(G g, E e, ASSERT_MESSAGE) {
 }
 
 /**
- * asertace, jestli hodnota g je vetsi nebo rovno e pomoci operatoru >=
+ * is greater or equal by operator >=
  */
 template<class E, class G>
 void assertGreaterOrEqual(G g, E e, ASSERT_MESSAGE) {
@@ -77,7 +77,7 @@ void assertGreaterOrEqual(G g, E e, ASSERT_MESSAGE) {
 }
 
 /**
- * asertace, jestli hodnota g je mensi nez e pomoci operatoru <
+ * is lesser by operator <
  */
 template<class E, class G>
 void assertLess(G g, E e, ASSERT_MESSAGE) {
@@ -88,7 +88,7 @@ void assertLess(G g, E e, ASSERT_MESSAGE) {
 }
 
 /**
- * asertace, jestli hodnota g je mensi nebo rovno e pomoci operatoru <=
+ * is lesser or equal by operator <=
  */
 template<class E, class G>
 void assertLessOrEqual(G g, E e, ASSERT_MESSAGE) {
@@ -99,7 +99,7 @@ void assertLessOrEqual(G g, E e, ASSERT_MESSAGE) {
 }
 
 /**
- * asertace, jestli ukazatel ukazuje na spravnou instanci
+ * assert given object is instance or its child
  */
 template<class E, class B>
 void assertInstanceOf(B *g, ASSERT_MESSAGE) {
@@ -109,7 +109,12 @@ void assertInstanceOf(B *g, ASSERT_MESSAGE) {
 }
 
 /**
- * asertace, jestli g a e jsou stejne instance (stejne misto v pameti)
+ * assert identity of objects (memory address)
+ * @param g given value to test
+ * @param e expected value
+ * @param msg error message template
+ * @param ... parameters of template
+ * @tparam T type of tested value
  */
 template<class T>
 void assertIdentical(T &g, T &e, string msg) {
@@ -119,7 +124,12 @@ void assertIdentical(T &g, T &e, string msg) {
 }
 
 /**
- * asertace, jestli g a e jsou ruzne instance (ruzne misto v pameti)
+ * assert not identity of objects (memory address)
+ * @param g given value to test
+ * @param e expected value
+ * @param msg error message template
+ * @param ... parameters of template
+ * @tparam T type of tested value
  */
 template<class T>
 void assertNotIdentical(T &g, T &e, ASSERT_MESSAGE) {
@@ -129,7 +139,11 @@ void assertNotIdentical(T &g, T &e, ASSERT_MESSAGE) {
 }
 
 /**
- * asertace, jestli je dany ukazatel NULL (0x0)
+ * assert pointer is null (0x0)
+ * @param g given value to test
+ * @param msg error message template
+ * @param ... parameters of template
+ * @tparam G type of tested value
  */
 template <class G>
 void assertNull(G *g, ASSERT_MESSAGE) {
@@ -139,7 +153,11 @@ void assertNull(G *g, ASSERT_MESSAGE) {
 }
 
 /**
- * asertace, jestli dany ukazatel neni NULL (0x0)
+ * assert pointer is not NULL (0x0)
+ * @param g given value to test
+ * @param msg error message template
+ * @param ... parameters of template
+ * @tparam G type of tested value
  */
 template<class G>
 void assertNotNull(G *g, ASSERT_MESSAGE) {
@@ -149,7 +167,11 @@ void assertNotNull(G *g, ASSERT_MESSAGE) {
 }
 
 /**
- * asertace, jestli je dana hodnota True
+ * assert True value
+ * @param g given value to test
+ * @param msg error message template
+ * @param ... parameters of template
+ * @tparam G type of tested value
  */
 template<class G=bool>
 void assertTrue(G g, ASSERT_MESSAGE) {
@@ -159,7 +181,11 @@ void assertTrue(G g, ASSERT_MESSAGE) {
 }
 
 /**
- * asertace, jestli je dana hodnota False
+ * assert False value
+ * @param g given value to test
+ * @param msg error message template
+ * @param ... parameters of template
+ * @tparam G type of tested value
  */
 template<class G=bool>
 void assertFalse(G g, ASSERT_MESSAGE) {
@@ -169,7 +195,14 @@ void assertFalse(G g, ASSERT_MESSAGE) {
 }
 
 /**
- * test if arrays has equal elements
+ * assert arrays have equal elements
+ * @param g array with given values
+ * @param e array with expected values
+ * @param n number of elements
+ * @param msg error message template
+ * @param ... arguments of template message
+ * @tparam E type of expected array
+ * @tparam G type of given array
  */
 template<class E, class G>
 void assertArrayEqual(G g, E e, size_t n, ASSERT_MESSAGE) {
@@ -182,7 +215,14 @@ void assertArrayEqual(G g, E e, size_t n, ASSERT_MESSAGE) {
 }
 
 /**
- * test if arrays has equal elements
+ * assert arrays have not equal elements
+ * @param g array with given values
+ * @param e array with expected values
+ * @param n number of elements
+ * @param msg error message template
+ * @param ... arguments of template message
+ * @tparam E type of expected array
+ * @tparam G type of given array
  */
 template<class E, class G>
 void assertArrayNotEqual(G g, E e, size_t n, ASSERT_MESSAGE) {
@@ -192,6 +232,27 @@ void assertArrayNotEqual(G g, E e, size_t n, ASSERT_MESSAGE) {
         return;
     }
 
+    THROW_ASSERT
+}
+
+/**
+ * assert exception thrown from given function
+ * @param callRef function pointe to call
+ * @param msg error message template
+ * @param ... arguments of template message
+ * @tparam EXCEPT exception type
+ */
+template<class EXCEPT>
+void assertThrow(void (*callRef)(), ASSERT_MESSAGE) {
+
+    try {
+        // call method
+        callRef();
+    } catch (EXCEPT &e) {
+        return;
+    }
+
+    // exception was not catched - raise assert error
     THROW_ASSERT
 }
 
