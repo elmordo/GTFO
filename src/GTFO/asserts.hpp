@@ -243,7 +243,7 @@ void assertArrayNotEqual(G g, E e, size_t n, GTFO_ASSERT_MESSAGE) {
  * @tparam EXCEPT exception type
  */
 template<class EXCEPT>
-void assertThrow(void (*callRef)(), ASSERT_MESSAGE) {
+void assertThrow(void (*callRef)(), GTFO_ASSERT_MESSAGE) {
 
     try {
         // call method
@@ -253,7 +253,7 @@ void assertThrow(void (*callRef)(), ASSERT_MESSAGE) {
     }
 
     // exception was not catched - raise assert error
-    THROW_ASSERT
+    GTFO_THROW_ASSERT
 }
 
 #undef GTFO_THROW_ASSERT
