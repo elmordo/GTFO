@@ -23,13 +23,13 @@ namespace GTFO {
 
 using namespace std;
 
-#define REGISTER_TEST(TEST_CALL) \
+#define GTFO_REGISTER_TEST(TEST_CALL) \
 	r->addReport();\
 	r->getReport(testIndex).name(#TEST_CALL);\
 	r->getReport(testIndex).className(className);\
 	setUp();\
 	try {\
-		TEST_CALL();\
+		GTFO_TEST_CALL();\
 		r->getReport(testIndex).state(Sopka::GTFO::AssertReport::ASSERT_OK);\
 		cout << ".";\
 	} catch (Sopka::GTFO::AssertException &e) {\
@@ -46,12 +46,12 @@ using namespace std;
 	tearDown();\
 	testIndex++;
 
-#define TEST_CASE : public Sopka::GTFO::TestCase
-#define TEST_IINIT std::size_t testIndex = 0;\
+#define GTFO_TEST_CASE : public Sopka::GTFO::TestCase
+#define GTFO_TEST_IINIT std::size_t testIndex = 0;\
 	std::string className = typeid(this).name();
-#define TEST_AGROUP(gName) addGroup(gName);
-#define TEST_DO(TESTS...) virtual void doTests() {TEST_IINIT TESTS}
-#define TEST_INIT(VALS...) virtual void init() { VALS }
+#define GTFO_TEST_AGROUP(gName) addGroup(gName);
+#define GTFO_TEST_DO(TESTS...) virtual void doTests() {GTFO_TEST_IINIT TESTS}
+#define GTFO_TEST_INIT(VALS...) virtual void init() { VALS }
 
 class TestCaseReport;
 
