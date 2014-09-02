@@ -51,7 +51,7 @@ using namespace std;
 	std::string className = typeid(this).name();
 #define GTFO_TEST_AGROUP(gName) addGroup(gName);
 #define GTFO_TEST_DO(TESTS...) virtual void doTests() {GTFO_TEST_IINIT TESTS}
-#define GTFO_TEST_INIT(VALS...) virtual void init() { VALS }
+#define GTFO_TEST_CASE_INIT(VALS...) virtual void init() { VALS }
 
 class TestCaseReport;
 
