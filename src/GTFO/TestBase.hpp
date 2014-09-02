@@ -26,7 +26,6 @@
 }
 
 #define GTFO_REGISTER_SUITE(CLASS_NAME) {\
-
 	CLASS_NAME s;\
 	s.doTests(settings);\
 	s.printReports(std::cout);\
