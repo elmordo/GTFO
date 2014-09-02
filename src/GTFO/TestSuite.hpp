@@ -82,6 +82,8 @@ public:
 	// separace seznamu skupin
 			const
 		TestGroupList &groups = settings.groups();
+			int testCount = 0;
+			int casesCount = 0;
 
 		// vyhodnoceni, jestli se jedna o include nebo exclude
 		if (settings.isInclude()) {
@@ -93,6 +95,8 @@ public:
 					continue;
 
 				(*pos)->doTests();
+				testCount += (*pos)->report()->size();
+				++casesCount;
 			}
 		} else {
 			for (TestCaseList::iterator pos = tc.begin(); pos != tc.end();
@@ -103,8 +107,12 @@ public:
 					continue;
 
 				(*pos)->doTests();
+                testCount += (*pos)->report()->size();
+                ++casesCount;
 			}
 		}
+
+		cout << endl << "Suite " << typeid(*this).name() << " finished, " << testCount << " tests done in " << casesCount << " test case(s)" << endl;
 	}
 
 	void printReports(ostream &out) {
