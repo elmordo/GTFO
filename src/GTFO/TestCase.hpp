@@ -112,6 +112,17 @@ public:
      */
     virtual void doTests() = 0;
 
+    void fail(const char *msg, ...) {
+        char messageBuffer[1024];
+
+        va_list msgArgs;
+        va_start(msgArgs, msg);
+        vsprintf(messageBuffer, msg, msgArgs);
+        va_end(msgArgs);
+
+        throw AssertException(messageBuffer);
+    }
+
     /**
      * vraci True, pokud je TC v dane skupiny
      */
