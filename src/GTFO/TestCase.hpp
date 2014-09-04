@@ -17,6 +17,8 @@
 #include <vector>
 #include <iostream>
 #include <typeinfo>
+#include <exception>
+#include <string>
 
 namespace Sopka {
 namespace GTFO {
@@ -37,6 +39,11 @@ using namespace std;
 		rep.message(e.what());\
 		rep.state(Sopka::GTFO::AssertReport::ASSERT_FAIL);\
 		cout << "F(" << (testIndex+1) << ")";\
+	} catch (std::exception &e){\
+	    Sopka::GTFO::AssertReport &rep = r->getReport(testIndex);\
+	    rep.message(std::string("Unhandled std exception: ") + e.what());\
+	    rep.state(Sopka::GTFO::AssertReport::ASSERT_ERROR);\
+	    cout << "E(" << (testIndex+1) << ")";\
 	} catch (...) {\
 		Sopka::GTFO::AssertReport &rep = r->getReport(testIndex);\
 		rep.message("Unhandled unknown exception");\
