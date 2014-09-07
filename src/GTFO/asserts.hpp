@@ -25,6 +25,7 @@ namespace GTFO {
 
 static char messageBuffer[1024];
 
+
 #ifndef GTFO_THROW_ASSERT
 #define GTFO_THROW_ASSERT va_list msgArgs; va_start(msgArgs, msg); vsprintf(messageBuffer, msg, msgArgs);va_end(msgArgs); throw AssertException(messageBuffer);
 #endif
@@ -37,7 +38,7 @@ static char messageBuffer[1024];
  * equal assertation by operator ==
  */
 template<class E, class G>
-void assertEqual(G g, E e, GTFO_ASSERT_MESSAGE) {
+void assertEqual(const G &g, const E &e, GTFO_ASSERT_MESSAGE) {
 	if (!(e == g)) {
 		// vyhozeni vyjimky
 		GTFO_THROW_ASSERT;
@@ -48,7 +49,7 @@ void assertEqual(G g, E e, GTFO_ASSERT_MESSAGE) {
  * non equal assertatiob by operator !=
  */
 template<class E, class G>
-void assertNotEqual(G g, E e, GTFO_ASSERT_MESSAGE) {
+void assertNotEqual(const G &g, const E &e, GTFO_ASSERT_MESSAGE) {
 	if (!(e != g)) {
 		// vyhozeni vyjimky
 		GTFO_THROW_ASSERT
@@ -59,7 +60,7 @@ void assertNotEqual(G g, E e, GTFO_ASSERT_MESSAGE) {
  * is greater by operator >
  */
 template<class E, class G>
-void assertGreater(G g, E e, GTFO_ASSERT_MESSAGE) {
+void assertGreater(const G &g, const E &e, GTFO_ASSERT_MESSAGE) {
 	if (!(g > e)) {
 		// vyhozeni vyjimky
 		GTFO_THROW_ASSERT
@@ -71,7 +72,7 @@ void assertGreater(G g, E e, GTFO_ASSERT_MESSAGE) {
  * is greater or equal by operator >=
  */
 template<class E, class G>
-void assertGreaterOrEqual(G g, E e, GTFO_ASSERT_MESSAGE) {
+void assertGreaterOrEqual(const G &g, const E &e, GTFO_ASSERT_MESSAGE) {
 	if (!(g >= e)) {
 		// vyhozeni vyjimky
 		GTFO_THROW_ASSERT
@@ -82,7 +83,7 @@ void assertGreaterOrEqual(G g, E e, GTFO_ASSERT_MESSAGE) {
  * is lesser by operator <
  */
 template<class E, class G>
-void assertLess(G g, E e, GTFO_ASSERT_MESSAGE) {
+void assertLess(const G &g, const E &e, GTFO_ASSERT_MESSAGE) {
 	if (!(g < e)) {
 		// vyhozeni vyjimky
 		GTFO_THROW_ASSERT
@@ -93,7 +94,7 @@ void assertLess(G g, E e, GTFO_ASSERT_MESSAGE) {
  * is lesser or equal by operator <=
  */
 template<class E, class G>
-void assertLessOrEqual(G g, E e, GTFO_ASSERT_MESSAGE) {
+void assertLessOrEqual(const G &g, const E &e, GTFO_ASSERT_MESSAGE) {
 	if (!(g <= e)) {
 		// vyhozeni vyjimky
 		GTFO_THROW_ASSERT
@@ -104,7 +105,7 @@ void assertLessOrEqual(G g, E e, GTFO_ASSERT_MESSAGE) {
  * assert given object is instance or its child
  */
 template<class E, class B>
-void assertInstanceOf(B *g, GTFO_ASSERT_MESSAGE) {
+void assertInstanceOf(const B *g, GTFO_ASSERT_MESSAGE) {
 	if ((dynamic_cast<E*>(g)) == 0) {
 		GTFO_THROW_ASSERT;
 	}
@@ -118,8 +119,8 @@ void assertInstanceOf(B *g, GTFO_ASSERT_MESSAGE) {
  * @param ... parameters of template
  * @tparam T type of tested value
  */
-template<class T>
-void assertIdentical(T &g, T &e, string msg) {
+template<class E, class G>
+void assertIdentical(const G &g, const E &e, string msg) {
 	if (&g != &e) {
 		throw AssertException(msg);
 	}
@@ -133,8 +134,8 @@ void assertIdentical(T &g, T &e, string msg) {
  * @param ... parameters of template
  * @tparam T type of tested value
  */
-template<class T>
-void assertNotIdentical(T &g, T &e, GTFO_ASSERT_MESSAGE) {
+template<class E, class G>
+void assertNotIdentical(const G &g, const E &e, GTFO_ASSERT_MESSAGE) {
 	if (&g == &e) {
 		GTFO_THROW_ASSERT
 	}
@@ -148,7 +149,7 @@ void assertNotIdentical(T &g, T &e, GTFO_ASSERT_MESSAGE) {
  * @tparam G type of tested value
  */
 template <class G>
-void assertNull(G *g, GTFO_ASSERT_MESSAGE) {
+void assertNull(const G *g, GTFO_ASSERT_MESSAGE) {
 	if (g != 0x0) {
 		GTFO_THROW_ASSERT
 	}
@@ -162,7 +163,7 @@ void assertNull(G *g, GTFO_ASSERT_MESSAGE) {
  * @tparam G type of tested value
  */
 template<class G>
-void assertNotNull(G *g, GTFO_ASSERT_MESSAGE) {
+void assertNotNull(const G *g, GTFO_ASSERT_MESSAGE) {
 	if (g == 0x0) {
 		GTFO_THROW_ASSERT
 	}
@@ -176,7 +177,7 @@ void assertNotNull(G *g, GTFO_ASSERT_MESSAGE) {
  * @tparam G type of tested value
  */
 template<class G=bool>
-void assertTrue(G g, GTFO_ASSERT_MESSAGE) {
+void assertTrue(const G &g, GTFO_ASSERT_MESSAGE) {
 	if (!g) {
 		GTFO_THROW_ASSERT
 	}
@@ -190,7 +191,7 @@ void assertTrue(G g, GTFO_ASSERT_MESSAGE) {
  * @tparam G type of tested value
  */
 template<class G=bool>
-void assertFalse(G g, GTFO_ASSERT_MESSAGE) {
+void assertFalse(const G &g, GTFO_ASSERT_MESSAGE) {
 	if (g) {
 		GTFO_THROW_ASSERT
 	}
@@ -207,7 +208,7 @@ void assertFalse(G g, GTFO_ASSERT_MESSAGE) {
  * @tparam G type of given array
  */
 template<class E, class G>
-void assertArrayEqual(G g, E e, size_t n, GTFO_ASSERT_MESSAGE) {
+void assertArrayEqual(const G &g, const E &e, size_t n, GTFO_ASSERT_MESSAGE) {
     try {
         for (size_t i = 0; i < n; ++i)
             assertEqual(g[i], e[i], "");
@@ -227,7 +228,7 @@ void assertArrayEqual(G g, E e, size_t n, GTFO_ASSERT_MESSAGE) {
  * @tparam G type of given array
  */
 template<class E, class G>
-void assertArrayNotEqual(G g, E e, size_t n, GTFO_ASSERT_MESSAGE) {
+void assertArrayNotEqual(const G &g, const E &e, size_t n, GTFO_ASSERT_MESSAGE) {
     try {
         assertArrayEqual(g, e, n, "");
     } catch (AssertException &) {
@@ -244,13 +245,13 @@ void assertArrayNotEqual(G g, E e, size_t n, GTFO_ASSERT_MESSAGE) {
  * @param ... arguments of template message
  * @tparam EXCEPT exception type
  */
-template<class EXCEPT>
-void assertThrow(void (*callRef)(), GTFO_ASSERT_MESSAGE) {
+template<class EXCEPTION, typename FN=void (*)()>
+void assertThrow(FN callRef, GTFO_ASSERT_MESSAGE) {
 
     try {
         // call method
         callRef();
-    } catch (EXCEPT &e) {
+    } catch (EXCEPTION &e) {
         return;
     }
 
