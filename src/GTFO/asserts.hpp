@@ -105,7 +105,7 @@ void assertLessOrEqual(const G &g, const E &e, GTFO_ASSERT_MESSAGE) {
  * assert given object is instance or its child
  */
 template<class E, class B>
-void assertInstanceOf(const B *g, GTFO_ASSERT_MESSAGE) {
+void assertInstanceOf(B *g, GTFO_ASSERT_MESSAGE) {
 	if ((dynamic_cast<E*>(g)) == 0) {
 		GTFO_THROW_ASSERT;
 	}
