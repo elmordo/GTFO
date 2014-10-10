@@ -10,6 +10,8 @@
 
 #define GTFO_MAIN_INIT \#include <iostream>
 
+#define GTFO_COMMA ,
+
 #define GTFO_TEST_MAIN(SUITES...) int main(int argc, char** argv) {\
 	Sopka::GTFO::TestGroupSettings settings;/* naparsovani argumentu*/\
 	if (argc > 1) {\
