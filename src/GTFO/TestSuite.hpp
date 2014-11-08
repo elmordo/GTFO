@@ -20,7 +20,7 @@ using namespace std;
 namespace Sopka {
 namespace GTFO {
 
-#define GTFO_TEST_SUITE : public TestSuite
+#define GTFO_TEST_SUITE : public Sopka::GTFO::TestSuite
 #define GTFO_REGISTER_TESTCASE(CLASS_NAME) this->tc.push_back(new CLASS_NAME());this->tc.back()->init()
 
 class TestSuite: public TestBase {

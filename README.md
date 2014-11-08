@@ -1,7 +1,7 @@
 GTFO
 ====
 
-GTFO is simple framework for unittests in C++ with no external dependencies (all code is in header files).
+GTFO is simple framework for unittests in C++ with no external dependencies and there is no need to include any external library (all code is in header files).
 
 Components
 ----------
@@ -22,25 +22,25 @@ Create your test case class at first.
 
 MyTestCase.hpp:
 
-<code>
-  #include &lt;GTFO/TestCase.hpp&gt;<br />
-  #include &lt;GTFO/asserts.hpp&gt;<br />
-  #include &lt;iostream&gt;<br />
 
-  using namespace std;
-  using namespace Sopka::GTFO;
+    #include <GTFO/TestCase.hpp>
+    #include <GTFO/asserts.hpp>
+    #include <iostream>
 
-  class MyTestCase : GTFO_TEST_CASE {
-  public:
+    using namespace std;
+    using namespace Sopka::GTFO;
+
+    class MyTestCase : GTFO_TEST_CASE {
+    public:
 
       GTFO_TEST_CASE_INIT(
         cout << "TestCase initialisation" << endl;
-        )
+      )
 
       GTFO_TEST_DO(
         GTFO_REGISTER_TEST(test1)
         GTFO_REGISTER_TEST(test2)
-        )
+      )
 
       /**
        * do some test
@@ -55,5 +55,48 @@ MyTestCase.hpp:
       void test2() {
         assertEqual(2, 2, "This assert should be ok");
       }
-  };
-</code>
+    };
+
+### TestSuite
+
+One or more TestCase instance is grouped into TestSuite. Test suite is logical group of test cases. Base class for test suites is Sopka::GTFO::TestSuite
+
+Provided macros:
+
+* GTFO_TEST_SUITE - include information about class inheritance for suite
+* GTFO_REGISTER_TESTCASE - register testcase into suite
+
+Example:
+
+    #include<GTFO/TestSuite.hpp>
+    
+    class SampleSuite GTFO_TEST_SUITE {
+    public:
+      
+      SampleSuite() {
+        GTFO_REGISTER_TESTCASE(SomeTestCaseClass);
+        GTFO_REGISTER_TESTCASE(SomeOtherTestCaseClass);
+      }
+    };
+
+### TestBase
+
+Basic module is TestBase.hpp. This header file provides several macros for initialization test environment.
+
+Provided macros:
+
+* GTFO_MAIN_INIT - include modules from STL required by environment
+* GTFO_COMMA - macro for comma character [,]
+* GTFO_TEST_MAIN - generate main() function for test program
+* GTFO_REGISTER_SUITE - register suite into main function
+
+Example:
+
+    #include<GTFO/TestBase.hpp>
+    
+    GTFO_MAIN_INIT
+    
+    GTFO_TEST_MAIN(
+      GTFO_REGISTER_SUITE(SomeSuiteClassToRegister),
+      GTFO_REGISTER_SUITE(SomeOtherSuiteClassToRegister)
+    )

@@ -7,3 +7,4 @@
 !*.mk
 !makefile
 /Debug
+/Release/
