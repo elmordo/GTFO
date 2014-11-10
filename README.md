@@ -1,7 +1,7 @@
 GTFO
 ====
 
-GTFO is simple framework for unittests in C++ with no external dependencies and there is no need to include any external library (all code is in header files).
+GTFO (Gremlin Test Framework Objects) is simple framework for unittests in C++ with no external dependencies and there is no need to include any external library (all code is in header files).
 
 Components
 ----------
