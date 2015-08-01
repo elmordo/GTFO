@@ -105,7 +105,7 @@ public:
 	 * vraci True, pokud existuje zprava s indexem i
 	 */
 	inline bool hasIndex(size_t i) const {
-		return i >= 0 && i < r.size();
+        return i < r.size();
 	}
 
 	/**

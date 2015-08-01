@@ -5,8 +5,8 @@
  *      Author: petr
  */
 
-#ifndef TESTCASE_HPP_
-#define TESTCASE_HPP_
+#ifndef GTFO_TESTCASE_HPP_
+#define GTFO_TESTCASE_HPP_
 
 #include "TestBase.hpp"
 #include "TestGroup.hpp"
@@ -54,10 +54,19 @@ using namespace std;
 	testIndex++;
 
 #define GTFO_TEST_CASE : public Sopka::GTFO::TestCase
+#define GTFO_TESTCASE(TCNAME) class TCNAME : public Sopka::GTFO::TestCase {\
+public:\
+    TCNAME() {}
+#define GTFO_ENDCASE };
+
 #define GTFO_TEST_INIT std::size_t testIndex = 0;\
 	std::string className = typeid(this).name();
 #define GTFO_TEST_AGROUP(GNAME) addGroup(GNAME);
 #define GTFO_TEST_DO(TESTS...) virtual void doTests() {GTFO_TEST_INIT TESTS}
+
+#define GTFO_TESTLIST virtual void doTests() { GTFO_TEST_INIT
+#define GTFO_ENDTESTLIST }
+
 #define GTFO_TEST_CASE_INIT(VALS...) virtual void init() { VALS }
 
 class TestCaseReport;

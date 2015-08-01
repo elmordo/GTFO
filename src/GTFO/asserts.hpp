@@ -31,7 +31,7 @@ static char messageBuffer[1024];
 #endif
 
 #ifndef GTFO_ASSERT_MESSAGE
-#define GTFO_ASSERT_MESSAGE const char *msg, ...
+#define GTFO_ASSERT_MESSAGE const char *msg="", ...
 #endif
 
 /**
