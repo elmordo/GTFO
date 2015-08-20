@@ -32,7 +32,7 @@ class TestSuite: public TestBase {
 public:
 
 	/**
-	 * typ pro uchovavani TC
+     * test case container
 	 */
 	typedef vector<TestCase*> TestCaseList;
 
@@ -43,36 +43,44 @@ private:
 		for (TestGroupList::const_iterator pos = groups.begin();
 				pos != groups.end(); pos++) {
 			if (tc.hasGroup(*pos)) {
-				// skupina nalezena
+                // group found
 				return true;
 			}
 		}
 
-		// pokud program dosel az sem, pak skupina nebyla nalezena
+        // group not found
 		return false;
 	}
 
 protected:
 
 	/**
-	 * obsahuje seznam provedenych TC
+     * contains list of testcases in suite
 	 */
 	TestCaseList tc;
 
 public:
 
 	/**
-	 * bezparametricky, zakladni konstruktor
+     * create empty instance
 	 */
-	TestSuite() {
-
+    TestSuite()
+    {
 	}
 
-	TestSuite(const TestSuite &o) {
+    /**
+     * @brief copytor
+     * @param o original instance
+     */
+    TestSuite(const TestSuite &o)
+    {
 		// kopirovani test cases
-
+        tc = o.tc;
 	}
 
+    /**
+     * @brief destroy all instances
+     */
 	virtual ~TestSuite() {
 		for (TestCaseList::const_iterator pos = tc.begin(); pos != tc.end();
 				pos++) {
@@ -81,10 +89,11 @@ public:
 	}
 
 	/**
-	 * provede testy
+     * run registered test cases
 	 */
-	void doTests(const TestGroupSettings& settings = TestGroupSettings()) {
-	// separace seznamu skupin
+    void doTests(const TestGroupSettings& settings = TestGroupSettings())
+    {
+        // separate test groups
 			const
 		TestGroupList &groups = settings.groups();
 			int testCount = 0;
@@ -103,7 +112,9 @@ public:
 				testCount += (*pos)->report()->size();
 				++casesCount;
 			}
-		} else {
+        }
+        else
+        {
 			for (TestCaseList::iterator pos = tc.begin(); pos != tc.end();
 					pos++) {
 
@@ -120,7 +131,12 @@ public:
 		cout << endl << "Suite " << typeid(*this).name() << " finished, " << testCount << " tests done in " << casesCount << " test case(s)" << endl;
 	}
 
-	void printReports(ostream &out) {
+    /**
+     * @brief print report into given stream
+     * @param out output stream
+     */
+    void printReports(ostream &out)
+    {
 		for (TestCaseList::const_iterator pos = tc.begin();
 				pos != tc.end();
 				pos++)
@@ -128,40 +144,40 @@ public:
 			const TestCaseReport::AssertReportList r = (*pos)->report()->reports();
 			int testIndex = 1;
 
-			cout << endl << endl;
+            out << endl << endl;
 
 			for (TestCaseReport::AssertReportList::const_iterator rep = r.begin();
 					rep != r.end();
 					rep++)
 			{
 				if (rep->state() != AssertReport::ASSERT_OK) {
-					cout << "Test case class (by typeid): " << rep->className() << endl;
-					cout << "Test index: " << testIndex << endl;
-					cout << "Test name: " << rep->name() << endl;
-					cout << "State: ";
+                    out << "Test case class (by typeid): " << rep->className() << endl;
+                    out << "Test index: " << testIndex << endl;
+                    out << "Test name: " << rep->name() << endl;
+                    out << "State: ";
 
 					switch (rep->state()) {
 					case AssertReport::ASSERT_ERROR:
-						cout << "Error";
+                        out << "Error";
 						break;
 
 					case AssertReport::ASSERT_FAIL:
-						cout << "Fail";
+                        out << "Fail";
 						break;
 
 					case AssertReport::NOT_ASSERTED:
-						cout << "Not asserted";
+                        out << "Not asserted";
 						break;
 
 					default:
-						cout << "Unknown status";
+                        out << "Unknown status";
 						break;
 					}
 
-					cout << endl << "Message :" << endl;
+                    out << endl << "Message :" << endl;
 
-					cout << rep->message() << endl;
-					cout << "-------------------------" << endl << endl;
+                    out << rep->message() << endl;
+                    out << "-------------------------" << endl << endl;
 				}
 
 				testIndex++;
