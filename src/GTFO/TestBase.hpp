@@ -6,6 +6,8 @@
  */
 
 #include <iostream>
+#include "TestGroupSettings.hpp"
+
 using namespace std;
 
 #ifndef TESTBASE_HPP_
