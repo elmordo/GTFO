@@ -61,13 +61,12 @@ public:\
 #define GTFO_TESTCASE_INIT std::size_t testIndex = 0;\
 	std::string className = typeid(this).name();
 #define GTFO_TESTCASE_AGROUP(GNAME) addGroup(GNAME);
-#define GTFO_TESTCASE_DO(TESTS...) virtual void doTests() {GTFO_TEST_INIT TESTS}
 
-#define GTFO_TESTCASE_TESTLIST virtual void doTests() { GTFO_TEST_INIT
+#define GTFO_TESTCASE_TESTLIST virtual void doTests() { GTFO_TESTCASE_INIT
 #define GTFO_TESTCASE_ENDTESTLIST }
 
-#define GTFO_TESTCASE_INIT virtual void init() {
-#define GTFO_TESTCASE_ENDINIT }
+#define GTFO_TESTCASE_INITCASE virtual void init() {
+#define GTFO_TESTCASE_ENDINITCASE }
 
 class TestCaseReport;
 

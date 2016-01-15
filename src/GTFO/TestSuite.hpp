@@ -22,7 +22,7 @@ namespace GTFO {
 
 #define GTFO_REGISTER_TESTCASE(CLASS_NAME) this->tc.push_back(new CLASS_NAME());this->tc.back()->init()
 
-#define GTFO_TESTSUITE(TSNAME) class TSNAME GTFO_TEST_SUITE {\
+#define GTFO_TESTSUITE(TSNAME) class TSNAME : public Sopka::GTFO::TestSuite {\
 public:\
     TSNAME() {
 #define GTFO_ENDTESTSUITE }};
