@@ -141,15 +141,21 @@ public:
 				pos++)
 		{
 			const TestCaseReport::AssertReportList r = (*pos)->report()->reports();
-			int testIndex = 1;
 
-            out << endl << endl;
+			int testIndex = 1;
+            bool whitePrinted = false;
 
 			for (TestCaseReport::AssertReportList::const_iterator rep = r.begin();
 					rep != r.end();
 					rep++)
 			{
 				if (rep->state() != AssertReport::ASSERT_OK) {
+                    if (!whitePrinted)
+                    {
+                        cout << endl << endl;
+                        whitePrinted = true;
+                    }
+
                     out << "Test case class (by typeid): " << rep->className() << endl;
                     out << "Test index: " << testIndex << endl;
                     out << "Test name: " << rep->name() << endl;
